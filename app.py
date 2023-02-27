@@ -3,7 +3,7 @@ import config
 from exts import db, mail
 from flask_migrate import Migrate
 import models
-
+from blueprints.auth import bp as auth_bp
 
 app = Flask(__name__)
 # 绑定配置文件
@@ -18,6 +18,9 @@ migrate = Migrate(app, db)
 # flask db init：只需要执行一次
 # flask db migrate：将orm模型生成迁移脚本
 # flask db upgrade：将迁移脚本映射到数据库中
+
+# 注册蓝图路由
+app.register_blueprint(auth_bp)
 
 
 @app.route("/test")
